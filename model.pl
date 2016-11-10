@@ -36,11 +36,14 @@ pasTP(Salle, Matiere) :-	salle(Salle),
 							normal(Matiere).
 							
 							
-																	cours(Matiere,Enseignant,Promotion),
-																	creneau(Creneau),
-																	tpEnMachine(Salle, Matiere).
+/*attribution(Salle, cours(Matiere,Enseignant,Promotion), Creneau) :-	salle(Salle),
+																		cours(Matiere,Enseignant,Promotion),
+																		creneau(Creneau),
+																		tpEnMachine(Salle, Matiere).*/
 																	
-attribution(Salle, cours(Matiere,Enseignant,Promotion), Creneau) :- salle(Salle),
-																	cours(Matiere,Enseignant,Promotion),
-																	creneau(Creneau),
-																	pasTP(Salle, Matiere).
+																	
+attribution(Salle, cours(Matiere,Enseignant,Promotion), Creneau, List) :-	salle(Salle),
+																			cours(Matiere,Enseignant,Promotion),
+																			creneau(Creneau),
+																			pasTP(Salle, Matiere),
+																			delete(List, Salle, NewList).
