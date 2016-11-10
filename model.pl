@@ -12,13 +12,13 @@ tp('android').
 normal('c++').
 normal('java').
 
-salle('pc-master').
 salle('ga').
 salle('e23').
+salle('pc-master').
 
-machine('pc-master').
 salleNormale('ga').
 salleNormale('e23').
+machine('pc-master').
 
 creneau('8h_10h').
 creneau('10h_12h').
@@ -36,9 +36,6 @@ pasTP(Salle, Matiere) :-	salle(Salle),
 							normal(Matiere).
 							
 							
-							
-							
-attribution(Salle, cours(Matiere,Enseignant,Promotion), Creneau) :- salle(Salle),
 																	cours(Matiere,Enseignant,Promotion),
 																	creneau(Creneau),
 																	tpEnMachine(Salle, Matiere).
