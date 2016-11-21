@@ -1,71 +1,44 @@
-:- dynamic(ok/1).
-:- dynamic(ok/2).
+:-module(promotion,[promotion/1],[group/2],[branch/1])
 
-enseignant(perronne).
-enseignant(hassenforder).
+%% Ce fichier contient la liste des promotions. &&
 
-promotion('3A IR').
-promotion('2A AS').
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Les promotions %%%
+%%%%%%%%%%%%%%%%%%%%%%
 
-matiere('android').
-matiere('c++').
-matiere('java').
+promotion('1A').
+promotion('2A').
+promotion('3A').
 
-tp('android').
-normal('c++').
-normal('java').
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Les Filières %%%%%
+%%%%%%%%%%%%%%%%%%%%%%
 
-salle('ga').
-salle('e23').
-salle('pc-master').
+branch('IR').
+branch('AS').
 
-salleNormale('ga').
-salleNormale('e23').
-machine('pc-master').
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Les Groupes %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
 
-creneau('8h_10h').
-creneau('10h_12h').
+group('1A', 'IR', g1).
+group('1A', 'IR', g2).
+group('2A', 'IR', g3).
+group('2A', 'IR', g4).
+group('3A', 'IR', g5).
+group('3A', 'IR', g6).
 
-cours('c++', perronne, '2A AS').
-cours('android', hassenforder, '3A IR').
-cours('java', perronne, '3A IR').
+group('1A', 'AS', g7).
+group('1A', 'AS', g8).
+group('2A', 'AS', g9).
+group('2A', 'AS', g10).
+group('3A', 'AS', g11.
+group('3A', 'AS', g12).
 
-tpEnMachine(Salle, Matiere) :-	salle(Salle),
-								machine(Salle),
-								tp(Matiere).
-								
-pasTP(Salle, Matiere) :-	salle(Salle),
-							salleNormale(Salle),
-							normal(Matiere).
+group(Promo,Branch,GroupeName):- promotion(Promo),branch(Branch).
 
+group(Name):-group(_,_,Name).
 
-attribution(Salle, cours(Matiere,Enseignant,Promotion), Creneau) :-	salle(Salle),
-																	cours(Matiere,Enseignant,Promotion),
-																	creneau(Creneau),
-																	tpEnMachine(Salle, Matiere),
-																	
-																	not(ok(Salle)),
-																	not(ok(cours(Matiere,Enseignant,Promotion))),
-																	
-																	not(ok(Promotion, Creneau)),
-																	
-																	assert(ok(Salle)),
-																	assert(ok(cours(Matiere,Enseignant,Promotion))),
-																	
-																	assert(ok(Promotion, Creneau)).
-																	
-																	
-attribution(Salle, cours(Matiere,Enseignant,Promotion), Creneau) :-	salle(Salle),
-																	cours(Matiere,Enseignant,Promotion),
-																	creneau(Creneau),
-																	pasTP(Salle, Matiere),
-																	
-																	not(ok(Salle)),
-																	not(ok(cours(Matiere,Enseignant,Promotion))),
-																	
-																	not(ok(Promotion, Creneau)),
-																	
-																	assert(ok(Salle)),
-																	assert(ok(cours(Matiere,Enseignant,Promotion))),
-																	
-																	assert(ok(Promotion, Creneau)).
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Contraintes %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
