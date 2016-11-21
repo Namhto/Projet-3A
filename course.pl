@@ -1,4 +1,4 @@
-:- module(course, [course/1, isTP/1, isTD/1]).
+:- module(course, [course/1, isTP/1, isTD/1, isMagistral/1]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% course %%%%%%
@@ -6,6 +6,12 @@
 course('c').
 course('java').
 course('maths').
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% magistral %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+magistral('java').
+magistral('c').
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% tp %%%%%%
@@ -26,3 +32,6 @@ isTP(Course) :- course(Course),
 				
 isTD(Course) :- course(Course),
 				td(Course).
+				
+isMagistral(Course) :- 	course(Course),
+						magistral(Course).
