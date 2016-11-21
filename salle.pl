@@ -23,5 +23,7 @@ equipment(board).
 roomEquipment(R,E):- room(R), equipment(E).
 
 %%Types de salles%%
+roomType(TP).
+roomType(normal).
 
 
