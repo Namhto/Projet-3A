@@ -1,5 +1,4 @@
-:-module(promotion,[promotion/1],[group/2],[group/1])
-
+:- module(promo,[promotion/1, branch/1, groupTP/3, groupTP/1, groupTD/3, groupTD/1]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% Les promotions %%%%%%%%
