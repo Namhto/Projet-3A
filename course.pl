@@ -7,7 +7,7 @@ course('c').
 course('java').
 course('maths').
 course('androide').
-course('marketing).
+course('marketing').
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% magistral %%%%%%

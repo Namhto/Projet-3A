@@ -1,5 +1,6 @@
-:- module (teacher,[teacher/1,teaches/2)]).
-use_module('course').
+:- module(teacher,[teacher/1,teaches/2]).
+:- use_module('course').
+
 %%%%%%%%%%%%%%%%
 %%%  Teacher %%%
 %%%%%%%%%%%%%%%%
