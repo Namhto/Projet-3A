@@ -23,16 +23,16 @@ time(ten).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% Cours magistral %%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-courseInstance(Teacher, Promotion, Branch, Place, CourseLabel, Time) :- isMagistral(CourseLabel), teaches(Teacher,CourseLabel), learn(CourseLabel, section(Promotion, Branch)), room(Place), time(Time).
+courseInstance(Teacher, Promotion, Place, CourseLabel, Time) :- isMagistral(CourseLabel), teaches(Teacher,CourseLabel), learn(CourseLabel, section(Promotion, Branch)), room(Place), time(Time).
 
 instanciate(courseInstance(T,Promotion, B,P,C,Time)) :- courseInstance(T,Promotion, B,P,C,Time). 
 
 schedule(S) :- instanciate(C1), append([],[C1],S1), 
 				instanciate(C2), append(S1,[C2],S).
 
-uniqueRessource([_]).
-uniqueRessource([courseInstance(_,_,P,_,Time)|R]) :- member(courseInstance(_,_,P,_,Time),R), !, fail.
-uniqueRessource([courseInstance(T,_,_,_,Time)|R]) :- member(courseInstance(T,_,_,_,Time),R), !, fail.
+uniqueRessource([_]) :- write('alalala').
+uniqueRessource([courseInstance(_,_,_,P,_,Time)|R]) :- member(courseInstance(_,_,_,P,_,Time),R), !, fail.
+uniqueRessource([courseInstance(T,_,_,_,_,Time)|R]) :- member(courseInstance(T,_,_,_,_,Time),R), !, fail.
 uniqueRessource([_|R]) :- uniqueRessource(R).
 
 /**
