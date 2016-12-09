@@ -2,11 +2,11 @@
  * Created by maxime on 08/12/2016.
  */
 
-import controller.Edt;
+import View.FileOverviewController;
+import controller.MainApp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -17,7 +17,7 @@ public class App extends Application {
 
     private Stage primaryStage;
     private BorderPane root;
-    private Edt edt;
+    private MainApp mainApp;
 
     public static void main(String[] args) {
         launch(args);
@@ -27,6 +27,9 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("EDT-Prolog");
+        MainApp m = new MainApp();
+        mainApp = m;
+        initPopulation();
         initRoot();
         showFileOverview();
     }
@@ -50,9 +53,18 @@ public class App extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("View/fileOverview.fxml"));
             AnchorPane fileOverview = loader.load();
             this.root.setCenter(fileOverview);
+
+            FileOverviewController controller = loader.getController();
+            controller.setMainApp(this.mainApp);
+
+
         }
         catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public void initPopulation(){
+        //this.mainApp.populate();
     }
 }
