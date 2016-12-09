@@ -24,6 +24,10 @@ courseInstance(Teacher, Student, Place, CourseLabel, Time) :- teaches(Teacher,Co
 
 instanciate(courseInstance(T,S,P,C,Time)) :- courseInstance(T,S,P,C,Time). 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Test_A : donne une liste de cours avec comme contraintes : SALLE, PROF, PROMO %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 scheduleAuto(S,X) :- schedule_Acc([], S, X).
 
 schedule_Acc(S,S,0) :- !.
@@ -31,10 +35,9 @@ schedule_Acc(L,S,X) :- instanciate(C), append(L,[C],L1),
 						Y is X-1,
 						schedule_Acc(L1,S,Y).
 						
-schedule(S) :- nbrCourses(X), scheduleAuto(S,X), uniqueRessource(S).
+nbrCourses(X) :- findall(P,learn(P,_),L), length(L,X).	
 
-nbrCourses(X) :- findall(P,learn(P,_),L), length(L,X).						
-
+test_A(S) :- nbrCourses(X), scheduleAuto(S,X), uniqueRessource(S).
 
 uniqueRessource([]).
 uniqueRessource([_]).
