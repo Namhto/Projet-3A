@@ -1,5 +1,7 @@
 package controller;
 
+import Model.Curse;
+import Model.Item;
 import Model.Teacher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,16 +14,33 @@ import java.util.ArrayList;
 public class MainApp {
 
     private ObservableList<Teacher> teachers = FXCollections.observableArrayList();
+    private ObservableList<Curse> curses = FXCollections.observableArrayList();
     private ObservableList<String> items = FXCollections.observableArrayList();
+
+
+    public ObservableList<Curse> getCurses() {
+        return curses;
+    }
+
 
     public MainApp(){
         Teacher p1 = new Teacher("Perronne");
         Teacher p2 = new Teacher("Hassenforder");
-        items.add("Teachers");
-
-
         teachers.add(p1);
         teachers.add(p2);
+
+        Curse c1 = new Curse("Java");
+
+        Curse c2 = new Curse("Android");
+        curses.addAll(c1,c2);
+
+        items.add("Teachers");
+        items.add("Classes");
+
+
+
+
+
     }
 
     public ObservableList<Teacher> getTeachers() {

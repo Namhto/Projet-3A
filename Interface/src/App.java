@@ -55,6 +55,7 @@ public class App extends Application {
             this.root.setCenter(fileOverview);
 
             FileOverviewController controller = loader.getController();
+
             controller.setMainApp(this.mainApp);
 
 
