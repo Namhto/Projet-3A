@@ -2,7 +2,7 @@
 
 %% Ce fichier contient les informations relatives aux salles de cours &&
 
-%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% Salles %%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%
 room('GA').

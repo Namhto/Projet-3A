@@ -1,4 +1,4 @@
-:-module(promo,[promotion/1, groupTD/1, groupTP/1, branch/1, section/2]).
+:-module(promo,[promotion/1, branch/1, pbdp/4]).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -15,48 +15,34 @@ promotion('2A').
 branch('IR').
 branch('AS').
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Les promotions avec filière %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Les associations promo - filiaire - groupe TD - groupe TP %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-section(P, B) :- promotion(P), branch(B).
+pbdp('1A', 'IR', d1, p1).
+pbdp('1A', 'IR', d1, p2).
+pbdp('1A', 'IR', d2, p2).
+pbdp('1A', 'IR', d2, p3).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%% Les Groupes de TD %%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+pbdp('2A', 'IR', d1, p1).
+pbdp('2A', 'IR', d1, p2).
+pbdp('2A', 'IR', d2, p2).
+pbdp('2A', 'IR', d2, p3).
 
-groupTD('1A', 'IR', g1).
-groupTD('1A', 'IR', g2).
-groupTD('2A', 'IR', g3).
-groupTD('2A', 'IR', g4).
+pbdp('1A', 'AS', d1, p1).
+pbdp('1A', 'AS', d1, p2).
+pbdp('1A', 'AS', d2, p2).
+pbdp('1A', 'AS', d2, p3).
 
-groupTD('1A', 'AS', g5).
-groupTD('1A', 'AS', g6).
-groupTD('2A', 'AS', g7).
-groupTD('2A', 'AS', g8).
-
-groupTD(Promo,Branch,GroupeName):- promotion(Promo),branch(Branch).
-
-groupTD(Name):-groupTD(_,_,Name).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%% Les Groupes de TD %%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-groupTP('1A', 'IR', g1).
-groupTP('1A', 'IR', g2).
-groupTP('2A', 'IR', g3).
-groupTP('2A', 'IR', g4).
-
-groupTP('1A', 'AS', g7).
-groupTP('1A', 'AS', g8).
-groupTP('2A', 'AS', g9).
-groupTP('2A', 'AS', g10).
-
-groupTP(Promo,Branch,GroupeName):- promotion(Promo),branch(Branch).
-
-groupTP(Name):-groupTP(_,_,Name).
+pbdp('2A', 'AS', d1, p1).
+pbdp('2A', 'AS', d1, p2).
+pbdp('2A', 'AS', d2, p2).
+pbdp('2A', 'AS', d2, p3).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%% Contraintes %%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+isAssociated(X,Y) :- pbdp(X,Y,_,_).
+isAssociated(X,Y) :- pbdp(X,_,Y,_).
+isAssociated(X,Y) :- pbdp(X,_,_,Y).

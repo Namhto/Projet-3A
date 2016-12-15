@@ -1,16 +1,7 @@
 :- use_module('./promo.pl').
 :- use_module('./course.pl').
 :- use_module('./salle.pl').
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%  Teacher %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-teacher('perrone').
-teacher('hassenforder').
-
-teaches('perrone','c').
-teaches('perrone','java').
-teaches('hassenforder','maths').
+:- use_module('./teacher.pl').
 
 learn('c', section('1A','IR')).
 learn('maths', section('1A','IR')).
@@ -26,7 +17,7 @@ instanciate(courseInstance(T,S,P,C,Time)) :- courseInstance(T,S,P,C,Time).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%% Test_A : donne une liste de cours avec comme contraintes : SALLE, PROF, PROMO %%%%%%%%
+%%%%%%% Test_A : donne une liste de cours avec comme contraintes : SALLE, PROF, PROMO %%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 scheduleAuto(S,X) :- schedule_Acc([], S, X).
 
@@ -38,6 +29,9 @@ schedule_Acc(L,S,X) :- instanciate(C), append(L,[C],L1),
 nbrCourses(X) :- findall(P,learn(P,_),L), length(L,X).	
 
 test_A(S) :- nbrCourses(X), scheduleAuto(S,X), uniqueRessource(S).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 uniqueRessource([]).
 uniqueRessource([_]).
