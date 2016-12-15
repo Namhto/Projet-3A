@@ -3,18 +3,26 @@
 :- use_module('./salle.pl').
 :- use_module('./teacher.pl').
 
-learn('c', section('1A','IR')).
-learn('maths', section('1A','IR')).
-learn('maths', section('1A','AS')).
-learn('java', section('2A','IR')).
+%%%%%%%%%%%%%%%%%%%%%% A déplacer dans promo.pl une fois bien modélisée %%%%%%%%%%%%%%%%%%%%%
+learn('c', '1A').
+learn('maths', '1A').
+learn('maths', '2A').
+learn('java', '2A').
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-time(height).
-time(ten).
+time('8'). time('9'). time('10'). time('11'). time('12'). time('13'). time('14'). time('15'). time('16'). time('17').
 
-courseInstance(Teacher, Student, Place, CourseLabel, Time) :- teaches(Teacher,CourseLabel), groupTD(Student), learn(CourseLabel, Student), room(Place), time(Time).
+day('monday').
+day('tuesday').
+day('wednesday').
+day('thirsday').
+day('friday').
+day('saturday').
+day('sunday').
+
+courseInstance(Teacher, Student, Place, CourseLabel, Time) :- teaches(Teacher,CourseLabel), promotion(Student), learn(CourseLabel, Student), room(Place), time(Time).
 
 instanciate(courseInstance(T,S,P,C,Time)) :- courseInstance(T,S,P,C,Time). 
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% Test_A : donne une liste de cours avec comme contraintes : SALLE, PROF, PROMO %%%%%%%
@@ -29,32 +37,36 @@ schedule_Acc(L,S,X) :- instanciate(C), append(L,[C],L1),
 nbrCourses(X) :- findall(P,learn(P,_),L), length(L,X).	
 
 test_A(S) :- nbrCourses(X), scheduleAuto(S,X), uniqueRessource(S).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+scheduleDay(S) :- nbrCourses(X), scheduleAuto(S,X), uniqueRessource(S).
+
+dayInstance(Day, S) :- scheduleDay(S), day(Day). /****** SCHEDULEDAY TOURNE A L'INFINI ***********/
+
+instanciateDay(dayInstance(Day, S)) :- dayInstance(Day, S).
+
+scheduleWeek_Acc(S,S) :- !.
+scheduleWeek_Acc(L,S) :- instanciateDay(D), append(L,[D], L1),
+						scheduleWeek_Acc(L1, S).
+						
+scheduleWeek(S) :- scheduleWeek_Acc([], S).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%													 CONTRAINTES 													%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Unicité %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 uniqueRessource([]).
 uniqueRessource([_]).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%% Contrainte de salle : salle utilisée une seule fois sur un créneau %%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 uniqueRessource([courseInstance(_,_,P,_,Time)|R]) :- member(courseInstance(_,_,P,_,Time),R), !, fail.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%% Contrainte de prof : prof a une seule fois cours sur un créneau %%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 uniqueRessource([courseInstance(T,_,_,_,Time)|R]) :- member(courseInstance(T,_,_,_,Time),R), !, fail.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%% Contrainte de promo : promo a une seule fois cours sur un créneau %%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 uniqueRessource([courseInstance(_,S,_,_,Time)|R]) :- member(courseInstance(_,S,_,_,Time),R), !, fail.
 
 uniqueRessource([_|R]) :- uniqueRessource(R).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 pascourta8h([]).
 pascourta8h([courseInstance(perrone,_,_,_,height)|_R]) :- !, fail.
