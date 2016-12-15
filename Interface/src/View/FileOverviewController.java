@@ -1,16 +1,14 @@
 package View;
 
 import Model.Curse;
+import Model.Item;
 import Model.Teacher;
 import controller.MainApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
@@ -35,6 +33,13 @@ public class FileOverviewController {
     private AnchorPane menu;
     @FXML
     private AnchorPane table;
+    @FXML
+    private Button addButton;
+    @FXML
+    private Button editButton;
+    @FXML
+    private Button deleteButton;
+
 
     private MainApp mainApp;
     /**
@@ -53,7 +58,7 @@ public class FileOverviewController {
             }
             if(newValue == "Classes"){
                 // Définie les données à afficher dans cette colonne.
-                this.itemColumn.setCellValueFactory(new PropertyValueFactory<Curse,String>("curse"));
+                this.itemColumn.setCellValueFactory(new PropertyValueFactory<Curse,String>("name"));
                 this.itemTableView.setItems(mainApp.getCurses());
                 this.itemColumn.setText("Curses");
             }
@@ -69,6 +74,49 @@ public class FileOverviewController {
         // Une fois les setCelleValueFactory de chaque colone défini, on appele la methode setItems de TableView
         this.itemTableView.setItems(mainApp.getTeachers());
         this.itemColumn.setText("Teachers");
+    }
+
+    public void addItem() {
+        if (itemListView.getSelectionModel().getSelectedItem() == "Teachers") {
+            Teacher newTeacher = new Teacher();
+            boolean okClicked = this.mainApp.showEditItemOverview(newTeacher);
+            if (okClicked) {
+                mainApp.getTeachers().add(newTeacher);
+            }
+        }
+
+        if (itemListView.getSelectionModel().getSelectedItem() == "Classes") {
+            Curse newCurse = new Curse();
+            boolean okClicked = this.mainApp.showEditItemOverview(newCurse);
+            if (okClicked) {
+                mainApp.getCurses().add(newCurse);
+            }
+        }
+    }
+    public void editItem(){
+        Item selectedItem = (Item) this.itemTableView.getSelectionModel().getSelectedItem();
+        if(selectedItem != null){
+            boolean alert = this.mainApp.showEditItemOverview(selectedItem);
+            if(alert){
+                System.out.println("Something");
+            }
+        }
+
+    }
+    public void deleteItem(){
+        int selectedItem = itemTableView.getSelectionModel().getSelectedIndex();
+        if(selectedItem >= 0){
+            this.itemTableView.getItems().remove(selectedItem);
+            System.out.println(selectedItem);
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(this.mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No item Selected");
+            alert.setContentText("Please select a item in the table.");
+            alert.showAndWait();
+        }
     }
 
 }

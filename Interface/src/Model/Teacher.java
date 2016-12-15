@@ -10,6 +10,11 @@ public class Teacher extends Item {
 
     private SimpleStringProperty name;
 
+    public Teacher(){
+        this.type = new SimpleStringProperty("teacher");
+        this.name = new SimpleStringProperty("Set Teacher Name");
+    }
+
     public Teacher(String name){
         this.type = new SimpleStringProperty("teacher");
         this.name = new SimpleStringProperty(name);

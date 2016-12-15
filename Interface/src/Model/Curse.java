@@ -7,21 +7,27 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Curse extends Item{
 
-    private SimpleStringProperty curse;
+    private SimpleStringProperty name;
 
-    public Curse(String curse){
-        this.curse = new SimpleStringProperty(curse);
+    public Curse(){
+        this.type = new SimpleStringProperty("curse");
+        this.name = new SimpleStringProperty("Set Curse Name");
     }
 
-    public String getCurse() {
-        return curse.get();
+    public Curse(String name){
+        this.type = new SimpleStringProperty("curse");
+        this.name = new SimpleStringProperty(name);
     }
 
-    public SimpleStringProperty curseProperty() {
-        return curse;
+    public String getName() {
+        return name.get();
     }
 
-    public void setCurse(String curse) {
-        this.curse.set(curse);
+    public SimpleStringProperty nameProperty() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
     }
 }
