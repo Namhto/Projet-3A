@@ -1,3 +1,5 @@
+:- module(main, [schedule/1]).
+
 :- use_module('./promo.pl').
 :- use_module('./course.pl').
 :- use_module('./salle.pl').
@@ -41,15 +43,16 @@ test_A(S) :- nbrCourses(X), scheduleAuto(S,X), uniqueRessource(S).
 
 scheduleDay(S) :- nbrCourses(X), scheduleAuto(S,X), uniqueRessource(S).
 
-dayInstance(Day, S) :- scheduleDay(S), day(Day). /****** SCHEDULEDAY TOURNE A L'INFINI ***********/
+dayInstance(Day, S) :- scheduleDay(S), day(Day).
 
 instanciateDay(dayInstance(Day, S)) :- dayInstance(Day, S).
 
-scheduleWeek_Acc(S,S) :- !.
-scheduleWeek_Acc(L,S) :- instanciateDay(D), append(L,[D], L1),
-						scheduleWeek_Acc(L1, S).
+scheduleWeek_Acc(S,S,0) :- !.
+scheduleWeek_Acc(L,S,X) :- instanciateDay(D), append(L,[D], L1),
+							Y is X-1,
+							scheduleWeek_Acc(L1, S, Y).
 						
-scheduleWeek(S) :- scheduleWeek_Acc([], S).
+scheduleWeek(S) :- scheduleWeek_Acc([], S, 7).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%													 CONTRAINTES 													%%%%%%%
@@ -66,8 +69,13 @@ uniqueRessource([courseInstance(T,_,_,_,Time)|R]) :- member(courseInstance(T,_,_
 uniqueRessource([courseInstance(_,S,_,_,Time)|R]) :- member(courseInstance(_,S,_,_,Time),R), !, fail.
 
 uniqueRessource([_|R]) :- uniqueRessource(R).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-pascourta8h([]).
+pascourt([], Time).
 pascourta8h([courseInstance(perrone,_,_,_,height)|_R]) :- !, fail.
 pascourta8h([_|R]) :-  pascourta8h(R).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TEST SERVEUR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+schedule(S) :- scheduleDay(S).
