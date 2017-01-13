@@ -2,7 +2,7 @@ package View;
 
 import controller.ExportToProlog;
 import controller.MainApp;
-import eu.hansolo.enzo.notification.Notification;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,8 +11,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
-import org.controlsfx.control.NotificationPane;
-import org.controlsfx.control.Notifications;
 
 
 
