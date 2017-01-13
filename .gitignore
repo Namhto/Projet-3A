@@ -1,1 +1,4 @@
 *.class
+.idea/workspace.xml
+*.xml
+teacher.pl
