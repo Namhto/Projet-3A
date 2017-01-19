@@ -38,7 +38,6 @@ public class FileOverviewController {
     private MainApp mainApp;
 
     public void addItem() {
-        System.out.println("11111111111");
         if (itemListView.getSelectionModel().getSelectedItem() == "Enseignants") {
             Teacher newTeacher = new Teacher();
             boolean okClicked = this.mainApp.showEditItemOverview(newTeacher);
@@ -65,10 +64,18 @@ public class FileOverviewController {
     }
     public void editItem(){
         Item selectedItem = (Item) this.itemTableView.getSelectionModel().getSelectedItem();
+        if(itemListView.getSelectionModel().getSelectedItem()=="Enseignants"){
+            if(selectedItem != null){
+                boolean alert = this.mainApp.showEditTeacherOverview((Teacher)selectedItem);
+                if(alert){
+                    System.out.println("L'edition c'est bien déroulé");
+                }
+            }
+        }
         if(selectedItem != null){
             boolean alert = this.mainApp.showEditItemOverview(selectedItem);
             if(alert){
-                System.out.println("Something");
+                System.out.println("L'edition c'est bien déroulé");
             }
         }
 

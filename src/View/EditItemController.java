@@ -54,16 +54,17 @@ public class EditItemController {
             errorMessage = "Please complete the item name";
         }
 
-        if(errorMessage.length() == 0) {
-            return true;
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(this.stage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
-            return false;
+        switch (errorMessage.length()) {
+            case 0:
+                return true;
+            default:
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(this.stage);
+                alert.setTitle("Invalid Fields");
+                alert.setHeaderText("Please correct invalid fields");
+                alert.setContentText(errorMessage);
+                alert.showAndWait();
+                return false;
         }
     }
 

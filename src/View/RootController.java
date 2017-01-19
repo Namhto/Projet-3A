@@ -3,17 +3,10 @@ package View;
 import controller.ExportToProlog;
 import controller.MainApp;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.web.WebView;
-import javafx.util.Duration;
-
-
+import javafx.scene.control.*;
+import javafx.scene.control.MenuItem;
 
 
 import java.awt.*;
@@ -24,11 +17,12 @@ import java.awt.*;
 public class RootController {
 
     @FXML
-    private MenuItem menuItemExport;
+    private javafx.scene.control.MenuItem menuItemExport;
+    private MainApp mainApp;
 
-
-
-    MainApp mainApp;
+    public MenuItem getMenuItemExport() {
+        return menuItemExport;
+    }
 
     /**
      * Export the objects (teachers, rooms,...) to prolog files so that the server prolog can handle them.

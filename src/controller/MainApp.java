@@ -5,6 +5,7 @@ import Model.Item;
 import Model.Room;
 import Model.Teacher;
 import View.EditItemController;
+import View.EditTeacherController;
 import View.FileOverviewController;
 import View.RootController;
 import javafx.application.Application;
@@ -12,6 +13,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -109,6 +113,9 @@ public class MainApp extends Application {
             RootController rootController = loader.getController();
             rootController.setMainApp(this);
 
+
+            rootController.getMenuItemExport().setAccelerator(new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN));
+
             this.primaryStage.show();
 
 
@@ -146,6 +153,29 @@ public class MainApp extends Application {
             EditItemController controller = loader.getController();
             controller.setStage(editDialog);
             controller.setItem(item);
+            editDialog.showAndWait();
+            return controller.isOkClicked();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean showEditTeacherOverview(Teacher teacher){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/editTeacher.fxml"));
+            AnchorPane editItem = loader.load();
+            Stage editDialog = new Stage();
+            editDialog.setTitle("Edit Teacher Dialog");
+            editDialog.initModality(Modality.WINDOW_MODAL);
+            editDialog.initOwner(this.primaryStage);
+
+            Scene scene = new Scene(editItem);
+            editDialog.setScene(scene);
+            EditTeacherController controller = loader.getController();
+            controller.setStage(editDialog);
+            controller.setTeacher(teacher);
             editDialog.showAndWait();
             return controller.isOkClicked();
 
