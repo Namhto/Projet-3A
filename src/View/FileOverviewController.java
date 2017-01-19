@@ -38,7 +38,8 @@ public class FileOverviewController {
     private MainApp mainApp;
 
     public void addItem() {
-        if (itemListView.getSelectionModel().getSelectedItem() == "Teachers") {
+        System.out.println("11111111111");
+        if (itemListView.getSelectionModel().getSelectedItem() == "Enseignants") {
             Teacher newTeacher = new Teacher();
             boolean okClicked = this.mainApp.showEditItemOverview(newTeacher);
             if (okClicked) {
@@ -46,7 +47,7 @@ public class FileOverviewController {
             }
         }
 
-        if (itemListView.getSelectionModel().getSelectedItem() == "Classes") {
+        if (itemListView.getSelectionModel().getSelectedItem() == "Cours") {
             Course newCourse = new Course();
             boolean okClicked = this.mainApp.showEditItemOverview(newCourse);
             if (okClicked) {
@@ -54,7 +55,7 @@ public class FileOverviewController {
             }
         }
 
-        if(itemListView.getSelectionModel().getSelectedItem() == "Rooms"){
+        if(itemListView.getSelectionModel().getSelectedItem() == "Salles"){
             Room newRoom = new Room();
             boolean okClicked = this.mainApp.showEditItemOverview(newRoom);
             if (okClicked) {

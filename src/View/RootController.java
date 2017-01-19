@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.web.WebView;
@@ -22,6 +23,10 @@ import java.awt.*;
  */
 public class RootController {
 
+    @FXML
+    private MenuItem menuItemExport;
+
+
 
     MainApp mainApp;
 
@@ -33,6 +38,13 @@ public class RootController {
         exportToProlog.exportTeachers(mainApp.getTeachers());
         exportToProlog.exportRooms(mainApp.getRooms());
         exportToProlog.exportCourses(mainApp.getCourses());
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Succès");
+        alert.setHeaderText(null);
+        alert.setContentText("L'exportation c'est bien passé !");
+
+        alert.showAndWait();
     }
 
     public void setMainApp(MainApp mainApp) {
