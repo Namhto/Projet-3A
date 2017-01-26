@@ -16,7 +16,7 @@ public class EditTeacherController {
     @FXML
     private TextField textFieldName;
     @FXML
-    private ComboBox comboBoxMatières;
+    private ComboBox<Course> comboBoxMatières;
     private Stage stage;
 
     private Teacher teacher;
@@ -32,7 +32,7 @@ public class EditTeacherController {
         this.teacher = teacher;
         this.textFieldName.setText(teacher.getName());
     }
-    public ComboBox getComboBoxMatières(){
+    public ComboBox<Course> getComboBoxMatières(){
         return comboBoxMatières;
     }
 
@@ -41,8 +41,7 @@ public class EditTeacherController {
      * Pour cela il faut crée une cellFactory et la lier au comboBox
      * @param c
      */
-    public void setComboBoxMatières(ObservableList c){
-
+    public void setComboBoxMatières(ObservableList<Course> c){
 
         Callback<ListView<Course>, ListCell<Course>> cellFactory = new Callback<ListView<Course>, ListCell<Course>>() {
             @Override
@@ -57,9 +56,9 @@ public class EditTeacherController {
                 };
             }
         };
+
         comboBoxMatières.setCellFactory(cellFactory);
         comboBoxMatières.setButtonCell(cellFactory.call(null));
-
 
         comboBoxMatières.setItems(c);
     }
