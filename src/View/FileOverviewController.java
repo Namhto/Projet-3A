@@ -40,7 +40,7 @@ public class FileOverviewController {
     public void addItem() {
         if (itemListView.getSelectionModel().getSelectedItem() == "Enseignants") {
             Teacher newTeacher = new Teacher();
-            boolean okClicked = this.mainApp.showEditItemOverview(newTeacher);
+            boolean okClicked = this.mainApp.showEditTeacherOverview(newTeacher);
             if (okClicked) {
                 mainApp.getTeachers().add(newTeacher);
             }

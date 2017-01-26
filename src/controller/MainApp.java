@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -176,6 +177,9 @@ public class MainApp extends Application {
             EditTeacherController controller = loader.getController();
             controller.setStage(editDialog);
             controller.setTeacher(teacher);
+
+            controller.setComboBoxMatières(courses);
+
             editDialog.showAndWait();
             return controller.isOkClicked();
 

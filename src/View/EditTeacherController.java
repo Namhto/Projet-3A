@@ -1,10 +1,12 @@
 package View;
 
+import Model.Course;
 import Model.Teacher;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 /**
  * Created by maxim on 19/01/2017.
@@ -13,6 +15,8 @@ public class EditTeacherController {
 
     @FXML
     private TextField textFieldName;
+    @FXML
+    private ComboBox comboBoxMatières;
     private Stage stage;
 
     private Teacher teacher;
@@ -28,6 +32,43 @@ public class EditTeacherController {
         this.teacher = teacher;
         this.textFieldName.setText(teacher.getName());
     }
+    public ComboBox getComboBoxMatières(){
+        return comboBoxMatières;
+    }
+
+    /**
+     * Permet d'afficher le nom de la matière dans le comboBox
+     * Pour cela il faut crée une cellFactory et la lier au comboBox
+     * @param c
+     */
+    public void setComboBoxMatières(ObservableList c){
+
+
+        Callback<ListView<Course>, ListCell<Course>> cellFactory = new Callback<ListView<Course>, ListCell<Course>>() {
+            @Override
+            public ListCell<Course> call(ListView<Course> courseListView) {
+                return new ListCell<Course>(){
+                    @Override
+                    protected void updateItem(Course course, boolean b) {
+                        super.updateItem(course, b);
+                        if(null == course) return;
+                        setText(course.getName());
+                    }
+                };
+            }
+        };
+        comboBoxMatières.setCellFactory(cellFactory);
+        comboBoxMatières.setButtonCell(cellFactory.call(null));
+
+
+        comboBoxMatières.setItems(c);
+    }
+
+
+    /**
+     * Transforme une observableList<Course> en une observableList<String> pour pouvoir
+     * les affichers comme il faut dans la comboBox d'edition d'un proffesseur
+     */
 
     private void handleOk(){
         if(this.isInputValid()){
