@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by othman on 13/01/2017.
@@ -11,7 +13,23 @@ public class TestServer {
 
         try {
             Runtime.getRuntime().exec("cmd /c start server\\server.bat");
+
+            Thread.sleep(3000);
+            URL url = new URL("http://localhost:4040/");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            InputStream is = connection.getInputStream();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+            StringBuffer response = new StringBuffer();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                response.append(line);
+            }
+
+            new TestParseResponse().parse(response.toString());
+
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
