@@ -1,16 +1,9 @@
 :-module(teacher, [teacher/1, teaches/2]).
+teacher('Perronne').
+teacher('Hassenforder').
+teacher('Thirion').
+teacher('Bourgeois').
+teacher('Studer').
+teacher('Ruma').
+teacher('Djedjick').
 
-%% Ce fichier contient les informations relatives aux enseignants &&
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%% Enseignants %%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-teacher('perrone').
-teacher('hassenforder').
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%% Relations prof - cours %%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-teaches('perrone','c').
-teaches('perrone','java').
-teaches('hassenforder','maths').
