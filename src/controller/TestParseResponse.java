@@ -9,8 +9,7 @@ import java.util.regex.Pattern;
  */
 public class TestParseResponse {
 
-    public void parse(String response) {
-        System.out.println(response);
+    public ArrayList<CourseInstance> parse(String response) {
 
         ArrayList<CourseInstance> list = new ArrayList<>();
         Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(response);
@@ -18,5 +17,7 @@ public class TestParseResponse {
             String[] courseInstance = m.group(1).split(",");
             list.add(new CourseInstance(courseInstance[0], courseInstance[1], courseInstance[2], courseInstance[3], Integer.valueOf(courseInstance[4])));
         }
+
+        return list;
     }
 }

@@ -3,6 +3,7 @@ package View;
 import controller.ExportToProlog;
 import controller.MainApp;
 
+import controller.TestServer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,16 +24,21 @@ import java.awt.*;
 public class RootController {
 
 
-    MainApp mainApp;
+    private MainApp mainApp;
 
     /**
-     * Export the objects (teachers, rooms,...) to prolog files so that the server prolog can handle them.
+     * Export the objects (teachers, rooms,...) to prolog files so that the prolog server can handle them.
      */
     public void export(){
         ExportToProlog exportToProlog = new ExportToProlog();
         exportToProlog.exportTeachers(mainApp.getTeachers());
         exportToProlog.exportRooms(mainApp.getRooms());
         exportToProlog.exportCourses(mainApp.getCourses());
+    }
+
+    public void generate() {
+        TestServer server = new TestServer();
+        server.run();
     }
 
     public void setMainApp(MainApp mainApp) {

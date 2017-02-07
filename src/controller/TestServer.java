@@ -1,15 +1,17 @@
 package controller;
 
+import java.beans.XMLEncoder;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by othman on 13/01/2017.
  */
 public class TestServer {
 
-    public static void main(String args[]) {
+    public void run() {
 
         try {
             Runtime.getRuntime().exec("cmd /c start server\\server.bat");
@@ -25,11 +27,24 @@ public class TestServer {
                 response.append(line);
             }
 
-            new TestParseResponse().parse(response.toString());
+            handleResponse(response.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleResponse(String res) {
+        TestParseResponse parser = new TestParseResponse();
+        ArrayList<CourseInstance> courses = parser.parse(res);
+
+        try {
+            XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("schedule.xml")));
+            encoder.writeObject(courses);
+            encoder.close();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }

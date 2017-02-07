@@ -16,10 +16,9 @@ import static com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text.NEW_LI
  */
 public class ExportToProlog {
 
-
     public void exportTeachers(ObservableList<Teacher> teachers){
         try {
-            File file = new File("teacher.pl");
+            File file = new File("server/prolog/teacher.pl");
             Writer w = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(w);
             for (Teacher teacher : teachers) {
@@ -39,7 +38,7 @@ public class ExportToProlog {
 
     public void exportRooms(ObservableList<Room> rooms){
         try {
-            File file = new File("room.pl");
+            File file = new File("server/prolog/room.pl");
             Writer w = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(w);
             for (Room room : rooms) {
@@ -58,7 +57,7 @@ public class ExportToProlog {
 
     public void exportCourses(ObservableList<Course> courses){
         try {
-            File file = new File("courses.pl");
+            File file = new File("server/prolog/courses.pl");
             Writer w = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(w);
             for (Course course : courses) {
