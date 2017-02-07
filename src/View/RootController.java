@@ -4,6 +4,7 @@ import controller.ExportToProlog;
 import controller.MainApp;
 
 
+import controller.TestServer;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.MenuItem;
@@ -39,6 +40,11 @@ public class RootController {
         alert.setContentText("L'exportation c'est bien passé !");
 
         alert.showAndWait();
+    }
+
+    public void generate() {
+        TestServer server = new TestServer();
+        server.run();
     }
 
     public void setMainApp(MainApp mainApp) {
