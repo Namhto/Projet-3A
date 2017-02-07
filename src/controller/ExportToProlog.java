@@ -19,15 +19,18 @@ public class ExportToProlog {
 
     public void exportTeachers(ObservableList<Teacher> teachers){
         try {
-            File file = new File("teacher.pl");
+            File file = new File("server/prolog/teacher.pl");
             Writer w = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(w);
+            bw.write(":-module(teacher, [teacher/1, teaches/2]).");
+            bw.newLine();
             for (Teacher teacher : teachers) {
                 bw.write("teacher('");
                 bw.write(teacher.getName());
                 bw.write("').");
                 bw.newLine();
             }
+            bw.newLine();
             for(Teacher teacher : teachers){
                 if(teacher.getEnseigne()!=null) {
                     bw.write("teaches('");
@@ -49,9 +52,11 @@ public class ExportToProlog {
 
     public void exportRooms(ObservableList<Room> rooms){
         try {
-            File file = new File("room.pl");
+            File file = new File("server/prolog/salle.pl");
             Writer w = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(w);
+            bw.write(":-module(salle,[room/1, roomSize/2, roomEquipment/2, roomType/2]).");
+            bw.newLine();
             for (Room room : rooms) {
                 bw.write("room('");
                 bw.write(room.getName());
@@ -68,15 +73,27 @@ public class ExportToProlog {
 
     public void exportCourses(ObservableList<Course> courses){
         try {
-            File file = new File("courses.pl");
+            File file = new File("server/prolog/courses.pl");
             Writer w = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(w);
+            bw.write(":- module(course, [course/1, isTP/1, isTD/1, isMagistral/1]).");
+            bw.newLine();
             for (Course course : courses) {
                 bw.write("course('");
                 bw.write(course.getName());
                 bw.write("').");
                 bw.newLine();
             }
+
+            bw.newLine();
+            bw.write("isTP(Course) :- course(Course),\n" +
+                    "\t\t\t\ttp(Course).\n" +
+                    "\t\t\t\t\n" +
+                    "isTD(Course) :- course(Course),\n" +
+                    "\t\t\t\ttd(Course).\n" +
+                    "\t\t\t\t\n" +
+                    "isMagistral(Course) :- \tcourse(Course),\n" +
+                    "\t\t\t\t\t\tmagistral(Course).");
             bw.flush();
             bw.close();
         }

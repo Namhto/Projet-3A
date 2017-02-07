@@ -1,4 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_40" class="java.beans.XMLDecoder">
- <object class="java.util.ArrayList"/>
-</java>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schedule>
+ <courseInstance course="c" promo="1A" room="GA" teacher="perrone" time="8"/>
+ <courseInstance course="c" promo="1A" room="GA" teacher="perrone" time="9"/>
+ <courseInstance course="c" promo="1A" room="GA" teacher="perrone" time="10"/>
+ <courseInstance course="c" promo="1A" room="GA" teacher="perrone" time="11"/>
+</schedule>
