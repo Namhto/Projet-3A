@@ -63,11 +63,58 @@ public class FileOverviewController {
         }
     }
     public void editItem(){
-        Item selectedItem = (Item) this.itemTableView.getSelectionModel().getSelectedItem();
+
+        String selectedListItem = (String) this.itemListView.getSelectionModel().getSelectedItem();
+        if(selectedListItem==null) selectedListItem ="null";
+        System.out.println(selectedListItem);
+
+        Item selectedTableItem = (Item) this.itemTableView.getSelectionModel().getSelectedItem();
+        if(selectedTableItem == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(this.mainApp.getPrimaryStage());
+            alert.setTitle("Pas de selection");
+            alert.setHeaderText("Aucune selection detecte");
+            alert.setContentText("Veuillez selectinner un item de la table de droite.");
+            alert.showAndWait();
+        }
+
+        boolean okClicked;
+        switch (selectedListItem){
+
+            case "Enseignants":
+                okClicked = this.mainApp.showEditTeacherOverview((Teacher)selectedTableItem);
+                if(okClicked){
+                    System.out.println("L'edition c'est bien déroulé");
+                }
+                break;
+            case "Cours":
+                okClicked = this.mainApp.showEditItemOverview((Course)selectedTableItem);
+                if (okClicked) {
+                    System.out.println("L'edition c'est bien déroulé");
+                }
+                break;
+            case "Salles" :
+                okClicked = this.mainApp.showEditItemOverview((Room)selectedTableItem);
+                if (okClicked) {
+                    System.out.println("L'edition c'est bien déroulé");
+                }
+                break;
+            default:
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(this.mainApp.getPrimaryStage());
+                alert.setTitle("Pas de selection");
+                alert.setHeaderText("Aucune selection detecte");
+                alert.setContentText("Veuillez selectinner un item de la table de gauche.");
+                alert.showAndWait();
+                break;
+        }
+
+
+        /*Item selectedItem = (Item) this.itemTableView.getSelectionModel().getSelectedItem();
         if(itemListView.getSelectionModel().getSelectedItem()=="Enseignants"){
             if(selectedItem != null){
-                boolean alert = this.mainApp.showEditTeacherOverview((Teacher)selectedItem);
-                if(alert){
+                boolean okClicked = this.mainApp.showEditTeacherOverview((Teacher)selectedItem);
+                if(okClicked){
                     System.out.println("L'edition c'est bien déroulé");
                 }
             }
@@ -77,9 +124,10 @@ public class FileOverviewController {
             if(alert){
                 System.out.println("L'edition c'est bien déroulé");
             }
-        }
+        }*/
 
     }
+
     public void deleteItem(){
         int selectedItem = itemTableView.getSelectionModel().getSelectedIndex();
         if(selectedItem >= 0){

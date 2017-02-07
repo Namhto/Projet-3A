@@ -28,6 +28,16 @@ public class ExportToProlog {
                 bw.write("').");
                 bw.newLine();
             }
+            for(Teacher teacher : teachers){
+                if(teacher.getEnseigne()!=null) {
+                    bw.write("teaches('");
+                    bw.write(teacher.getName());
+                    bw.write("','");
+                    bw.write(teacher.getEnseigne().getName());
+                    bw.write("').");
+                    bw.newLine();
+                }
+            }
             bw.flush();
             bw.close();
         }

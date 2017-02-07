@@ -31,6 +31,7 @@ public class EditTeacherController {
     public  void setTeacher(Teacher teacher){
         this.teacher = teacher;
         this.textFieldName.setText(teacher.getName());
+        this.comboBoxMatières.setValue(teacher.getEnseigne());
     }
     public ComboBox<Course> getComboBoxMatières(){
         return comboBoxMatières;
@@ -68,16 +69,17 @@ public class EditTeacherController {
      * Transforme une observableList<Course> en une observableList<String> pour pouvoir
      * les affichers comme il faut dans la comboBox d'edition d'un proffesseur
      */
-
+    @FXML
     private void handleOk(){
         if(this.isInputValid()){
             this.teacher.setName(textFieldName.getText());
+            this.teacher.setEnseigne(comboBoxMatières.getValue());
             this.okClicked = true;
             this.stage.close();
         }
     }
 
-    //Structure de controle pour s'assurer que l'utilisateur complète bien tous les champs
+    //Structure de contrôle pour s'assurer que l'utilisateur complète bien tous les champs
     private boolean isInputValid(){
         String errorMessage="";
         if(this.textFieldName.getText()==null || this.textFieldName.getText().length() == 0){
