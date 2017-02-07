@@ -5,4 +5,3 @@ teacher('Bourgeois').
 teacher('Studer').
 teacher('Ruma').
 teacher('Djedjick').
-teaches('Thirion','C++').
