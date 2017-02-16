@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ensisa.uha.mo.prolog.View.EditTeacherController">
+   <children>
+      <Label layoutX="34.0" layoutY="57.0" text="Nom de L'enseignant : " />
+      <TextField fx:id="textFieldName" layoutX="158.0" layoutY="53.0" />
+      <Button fx:id="buttonOk" layoutX="157.0" layoutY="151.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="25.0" prefWidth="60.0" text="Ok" />
+      <Button fx:id="buttonCancel" layoutX="232.0" layoutY="151.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Annuler" />
+      <ComboBox fx:id="comboBoxMatières" layoutX="158.0" layoutY="83.0" prefWidth="150.0" />
+      <Label layoutX="34.0" layoutY="87.0" text="Matière enseigné : " />
+   </children>
+</AnchorPane>
