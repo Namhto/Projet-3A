@@ -1,0 +1,1 @@
+java -jar server\Prolog-Server-Test.jar
